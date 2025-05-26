@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AMACE CAD Upload Form</title>
+  <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init({
+        publicKey: "yWSZ9xBC8dEyr0CH7",
+      });
+   })();
+</script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #f1f3f4;
+      padding-bottom: 4rem;
+    }
+
+    /* Header */
+    header {
+       background: #ffffff;
+      height: 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: none;
+      border-bottom: 1px solid #ccc;
+      text-align: none;
+      padding-top: 1rem;
+      position: relative;
+    }
+
+    header img {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      height: 60px;
+    }
+
+    header h1 {
+      font-size: 30px;
+      color: #010811;
+      margin: 0;
+    }
+
+    /* Form Sections */
+    form {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    section {
+      background: #ffffff;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      opacity: 0.5;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    section.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    h2 {
+      margin-top: 0;
+      color: #202124;
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.4rem;
+      font-weight: 500;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.6rem;
+      border: 1px solid #dadce0;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    button {
+      background-color: #1a73e8;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #1669c1;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #202124;
+      color: #ccc;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    footer p {
+      margin: 0.5rem 0;
+    }
+
+    .social-links a {
+      color: #90caf9;
+      margin: 0 0.6rem;
+      text-decoration: none;
+    }
+
+    .social-links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <img src="https://am-ace.com/wp-content/uploads/2024/11/amace-logo.svg" alt="AMACE Logo">
+    <h1>Metal 3D Printing Service & Sample Parts</h1>
+  </header>
+
+  <!-- Form -->
+  <form id="cadForm">
+
+    <!-- Section 1 -->
+    <section class="active" id="section1">
+      <div class="form-group">
+        <label for="name">Name *</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email ID *</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="cnm">Company Name (Optional)</label>
+        <input type="text" id="cnm" name="cnm">
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone Number *</label>
+        <input type="tel" id="phone" name="phone" required>
+      </div>
+    </section>
+
+    <!-- Section 2 -->
+    <!--<section id="section2">
+      <h2>Upload CAD Model</h2>
+      <div class="form-group">
+        <label for="cadFile">CAD File</label>
+        <input type="file" id="cadFile" accept=".stp,.step,.igs,.iges,.stl"  name="cadFile" required>
+      </div>
+    </section> -->
+
+    <!-- Section 2 -->
+  <!-- Section 2: Updated for Google Drive or OneDrive Link -->
+<section id="section2">
+  <h2>Provide CAD Model Link</h2>
+  <div class="form-group">
+    <label for="cadLink">CAD File Link (Google Drive / OneDrive) *</label>
+    <input type="url" id="cadLink" name="cadLink" placeholder="https://drive.google.com/... or https://onedrive.live.com/..." required>
+    <small>
+      <i>
+        Please make sure the file is accessible via the link. <br />
+        For Google Drive: Click "Share" > "Anyone with the link". <br />
+        For OneDrive: Right-click the file > "Share" > Set to "Anyone with the link can view".
+      </i>
+    </small>
+  </div>
+</section>
+
+
+    <!-- Section 3 -->
+    <section id="section3">
+      <!--<h2>Machine Selection & Remarks</h2>-->
+      <div class="form-group">
+        <label for="raw">Raw Material *</label>
+        <input type="text" id="raw" name="raw" required>
+        <!--<select id="machine" name="machine" required>
+          <option value="">-- Select a machine --</option>
+          <option value="STLR 400">STLR 400</option>
+          <option value="STLR 200">STLR 200</option>
+          <option value="STLR 180">STLR 180</option>
+        </select>-->
+      </div>
+      <div class="form-group">
+        <label for="qty">Quantity in No's *</label>
+        <input type="number" id="qty" name="qty" required>
+      </div>
+      <div class="form-group">
+        <label for="comments">Remarks</label>
+        <textarea id="comments" name="comments"  placeholder="Any additional info..." required></textarea>
+      </div>
+      <button type="submit">Submit</button>
+    </section>
+
+  </form>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 AMACE Solutions Pvt. Ltd.</p>
+    <div class="social-links">
+  <a href="https://am-ace.com/" target="_blank">
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/domain.png" alt="Website Icon" /> Website
+  </a>
+  <a href="https://www.linkedin.com/company/amace-solutions/" target="_blank">
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/linkedin.png" alt="LinkedIn Icon" /> LinkedIn
+  </a>
+  <a href="https://www.instagram.com/amace_solutions/" target="_blank">
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/instagram-new.png" alt="Instagram Icon" /> Instagram
+  </a>
+  <a href="https://www.facebook.com/profile.php?id=61566386526434" target="_blank">
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/facebook.png" alt="Facebook Icon" /> Facebook
+  </a>
+  <a href="https://www.youtube.com/@amacesolutions" target="_blank">
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/youtube-play.png" alt="YouTube Icon" /> YouTube
+  </a>
+</div>
+  </footer>
+
+  <!-- JS to manage section progression -->
+ <script>
+  const sections = document.querySelectorAll('section');
+  const inputs = document.querySelectorAll('input, select, textarea');
+
+  function updateSections() {
+    let isValidSoFar = true;
+
+    sections.forEach((section) => {
+      const fields = section.querySelectorAll('input, select, textarea');
+      const allValid = [...fields].every(field => field.checkValidity());
+
+      if (isValidSoFar) {
+        section.classList.add('active');
+      } else {
+        section.classList.remove('active');
+      }
+
+      isValidSoFar = isValidSoFar && allValid;
+    });
+  }
+
+  inputs.forEach(input => {
+    input.addEventListener('input', updateSections);
+    input.addEventListener('change', updateSections);
+  });
+
+  updateSections();
+
+  // EmailJS submission
+  document.getElementById('cadForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    emailjs.sendForm('default_service', 'template_uph5e9g', this)
+      .then(function () {
+        alert("Form submitted successfully!");
+        document.getElementById('cadForm').reset();
+        updateSections();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, function (error) {
+        console.error('FAILED...', error);
+        alert("Failed to send form. Please try again later.");
+      });
+  });
+</script>
+
+
+
+  <!-- <script>
+    const sections = document.querySelectorAll('section');
+    const inputs = document.querySelectorAll('input, select, textarea');
+
+    function updateSections() {
+      let isValidSoFar = true;
+
+      sections.forEach((section, index) => {
+        const fields = section.querySelectorAll('input, select, textarea');
+        const allValid = [...fields].every(field => field.checkValidity());
+
+        if (isValidSoFar) {
+          section.classList.add('active');
+        } else {
+          section.classList.remove('active');
+        }
+
+        isValidSoFar = isValidSoFar && allValid;
+      });
+    }
+
+    inputs.forEach(input => {
+      input.addEventListener('input', updateSections);
+      input.addEventListener('change', updateSections);
+    });
+
+    document.getElementById('cadForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert("Form submitted successfully!");
+      this.reset();
+      updateSections();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    updateSections();
+
+     emailjs.init("yWSZ9xBC8dEyr0CH7"); // Your public key
+
+  document.getElementById('cadForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    emailjs.sendForm('default_service', 'template_uph5e9g', this)
+      .then(function(response) {
+         //alert("Form submitted successfully!");
+         document.getElementById('cadForm').reset();
+         updateSections(); // Reset section visibility
+         window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, function(error) {
+         console.error('FAILED...', error);
+         alert("Failed to send form. Please try again later.");
+      });
+  });
+
+
+  </script> -->
+
+</body>
+</html>
